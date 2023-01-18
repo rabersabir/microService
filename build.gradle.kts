@@ -81,38 +81,9 @@ tasks.jacocoTestReport {
     }
 }
 
-
-
 sourceSets.main {
     java.srcDir("$buildDir/generatedSources/src/main/java")
     resources.srcDir("$buildDir/generatedSources/src/main/resources")
 }
-tasks.named("compileJava") {
-    dependsOn("openApiGenerate")
-}
-tasks.named("processResources")
-{ dependsOn("openApiGenerate") }
 
 
-openApiGenerate {
-    generatorName.set("java")
-    inputSpec.set("$rootDir/src/main/specs/IGW_API_SEARCH_&_PRODUCT_V_5.yaml")
-    outputDir.set("$buildDir/generatedSources")
-    apiPackage.set("com.atradius.corporate-reference-data.api")
-    modelPackage.set("com.atradius.corporate-reference-data.api.model")
-    configOptions.set(mapOf("dateLibrary" to "java8-localdatetime", "implicitHeaders" to "true", "openApiNullable" to "false", "useBeanValidation" to "true", "useSpringBoot3" to "true", "useTags" to "true"))
-    ignoreFileOverride.set ("$rootDir/src/main/specs/.openapi-generator-ignore")
-}
-
-tasks.register("apiaryGenerate", GenerateTask::class) {
-    group = "OpenAPI Tools"
-    description = "Generate Apiary API"
-    generatorName.set("java")
-    inputSpec.set("$rootDir/src/main/specs/IGW_API_SEARCH_&_PRODUCT_V_5.yaml")
-    outputDir.set("$buildDir/generatedSources")
-    apiPackage.set("com.atradius.apiary.corporate-reference-data.api")
-    modelPackage.set("com.atradius.apiary.corporate-reference-data.api.model")
-    configOptions.set(mapOf("dateLibrary" to "java8-localdatetime",
-            "implicitHeaders" to "true", "openApiNullable" to "false",
-            "useBeanValidation" to "true", "useSpringBoot3" to "true", "useTags" to "true"))
-}

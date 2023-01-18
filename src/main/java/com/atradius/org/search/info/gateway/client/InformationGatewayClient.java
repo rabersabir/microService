@@ -1,6 +1,7 @@
 package com.atradius.org.search.info.gateway.client;
 
 
+import com.atradius.org.search.info.gateway.model.CompanySearchResultItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -12,6 +13,8 @@ import java.util.Arrays;
 @Component
 public class InformationGatewayClient {
 
+    private final static String PROVIDERCODE = "";
+
 
     @Value("${information.gateway.base.url}")
     private String baseUrl;
@@ -22,18 +25,15 @@ public class InformationGatewayClient {
     @Autowired
     private RestTemplate template;
 
-    public GatewayResponse queryInformationGateway(InformationGateWayRequest informationGateWayRequest) {
-
+    public GatewayResponse queryInformationGateway(InformationGateWayRequest informationGateWayRequest)   {
         HttpHeaders headers = getHttpHeaders();
-
         HttpEntity<InformationGateWayRequest> requestEntity =
                 new HttpEntity<>(informationGateWayRequest, headers);
-        ResponseEntity<CompanyInfo[]> responseEntity =
+        ResponseEntity<CompanySearchResultItem[]> responseEntity =
                 template.exchange(composeUrl(), HttpMethod.POST, requestEntity,
-                        CompanyInfo[].class);
-
+                        CompanySearchResultItem[].class);
         GatewayResponse gatewayResponse = new GatewayResponse();
-        gatewayResponse.setCompanyInfoList(Arrays.asList(responseEntity.getBody()));
+        gatewayResponse.setCompanySearchResultItems(Arrays.asList(responseEntity.getBody()));
         return gatewayResponse;
     }
 

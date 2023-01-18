@@ -1,38 +1,82 @@
 [
   {
-    "type": "name",
-    "value": "string",
-    "allowedOperations": "CONTAINS,EXACT",
-    "description": "Name of the company or freelance"
+    "internalCode": {
+      "type": "PROVIDER",
+      "provider": "Iberinform Portugal",
+      "identifier": "62003597",
+      "identifierType": null
+    },
+    "name": "CENTRO AQUICOLA DO RIO AVE",
+    "firstSurname": null,
+    "secondSurname": null,
+    "address": {
+      "fullAddress": "Av.  Bernardino Machado,  4480-657 VILA DO CONDE",
+      "streetName": "Av.  Bernardino Machado",
+      "place": null,
+      "postCode": "4480-657 VILA DO CONDE",
+      "county": "Vila do Conde",
+      "text": null,
+      "district": null,
+      "country": {
+        "code": "PRT",
+        "name": "Portugal"
+      },
+      "telephone": null,
+      "fax": null,
+      "coordinates": null
+    },
+    "economicActivities": [
+      {
+        "activityCode": "70220",
+        "percentage": null,
+        "description": null,
+        "classificationType": "NACE_V1",
+        "type": null
+      }
+    ],
+    "identificationNumbers": [
+      {
+        "type": "OFFICIAL",
+        "provider": null,
+        "identifier": "501868119",
+        "identifierType": "VAT"
+      }
+    ]
   },
   {
-    "type": "phonenumber",
-    "value": "string",
-    "allowedOperations": "EXACT",
-    "description": "The company telephone number"
-  },
-  {
-    "type": "postalCode",
-    "value": "string",
-    "allowedOperations": "CONTAINS",
-    "description": "The address Postal Code"
-  },
-  {
-    "type": "vat",
-    "value": "string",
-    "allowedOperations": "EXACT",
-    "description": "VAT of the company"
-  },
-  {
-    "type": "name",
-    "value": "string",
-    "allowedOperations": "CONTAINS",
-    "description": "Name of the company or freelance"
-  },
-  {
-    "type": "nif",
-    "value": "string",
-    "allowedOperations": "CONTAINS",
-    "description": "NIF of the company"
+    "internalCode": {
+      "type": "PROVIDER",
+      "provider": "Iberinform Portugal",
+      "identifier": "24115209",
+      "identifierType": null
+    },
+    "name": "FÁBRICA RIO AVE, LDA.",
+    "firstSurname": null,
+    "secondSurname": null,
+    "address": {
+      "fullAddress": "\n\t\t\t, , 4760-000 VILA NOVA DE FAMALICÃO",
+      "streetName": "\n\t\t\t",
+      "place": null,
+      "postCode": "4760-000 VILA NOVA DE FAMALICÃO",
+      "county": "Vila Nova Famalicão",
+      "text": null,
+      "district": null,
+      "country": {
+        "code": "PRT",
+        "name": "Portugal"
+      },
+      "telephone": null,
+      "fax": null,
+      "coordinates": null
+    },
+    "economicActivities": [],
+    "identificationNumbers": [
+      {
+        "type": "OFFICIAL",
+        "provider": null,
+        "identifier": "500107653",
+        "identifierType": "VAT"
+      }
+    ]
   }
 ]

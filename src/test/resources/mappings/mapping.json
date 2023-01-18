@@ -5,7 +5,7 @@
   },
   "response": {
     "status": 200,
-    "body": "[\n  {\n    \"type\": \"name\",\n    \"value\": \"string\",\n    \"allowedOperations\": \"CONTAINS,EXACT\",\n    \"description\": \"Name of the company or freelance\"\n  },\n  {\n    \"type\": \"phonenumber\",\n    \"value\": \"string\",\n    \"allowedOperations\": \"EXACT\",\n    \"description\": \"The company telephone number\"\n  },\n  {\n    \"type\": \"postalCode\",\n    \"value\": \"string\",\n    \"allowedOperations\": \"CONTAINS\",\n    \"description\": \"The address Postal Code\"\n  },\n  {\n    \"type\": \"vat\",\n    \"value\": \"string\",\n    \"allowedOperations\": \"EXACT\",\n    \"description\": \"VAT of the company\"\n  },\n  {\n    \"type\": \"name\",\n    \"value\": \"string\",\n    \"allowedOperations\": \"CONTAINS\",\n    \"description\": \"Name of the company or freelance\"\n  },\n  {\n    \"type\": \"nif\",\n    \"value\": \"string\",\n    \"allowedOperations\": \"CONTAINS\",\n    \"description\": \"NIF of the company\"\n  }\n]",
+    "bodyFileName": "response.json",
     "headers": {
       "Content-Type": "text/plain"
     }
