@@ -12,6 +12,7 @@ import java.util.Arrays;
 @Component
 public class InformationGatewayClient {
 
+
     @Value("${information.gateway.base.url}")
     private String baseUrl;
 
@@ -27,11 +28,13 @@ public class InformationGatewayClient {
 
         HttpEntity<InformationGateWayRequest> requestEntity =
                 new HttpEntity<>(informationGateWayRequest, headers);
-        ResponseEntity<AllowedOperation[]> responseEntity =
+        ResponseEntity<CompanyInfo[]> responseEntity =
                 template.exchange(composeUrl(), HttpMethod.POST, requestEntity,
-                        AllowedOperation[].class);
+                        CompanyInfo[].class);
 
-        return new GatewayResponse();
+        GatewayResponse gatewayResponse = new GatewayResponse();
+        gatewayResponse.setCompanyInfoList(Arrays.asList(responseEntity.getBody()));
+        return gatewayResponse;
     }
 
     private HttpHeaders getHttpHeaders() {

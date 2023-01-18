@@ -1,12 +1,14 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     java
     jacoco
     id("org.springframework.boot") version "3.0.1"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
+    id("org.openapi.generator") version "4.3.1"
 
 }
-
 group = "com.atradius.org.search"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -22,10 +24,22 @@ repositories {
     mavenCentral()
 }
 
+buildscript {
+    dependencies {
+        classpath("org.openapitools:openapi-generator-gradle-plugin:4.3.1")
+    }
+}
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:4.0.0")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+    implementation("com.squareup.okhttp3:okhttp:4.5.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation("com.google.code.gson:gson:2.7")
+    implementation("io.gsonfire:gson-fire:1.0.1")
+    implementation("javax.validation:validation-api:2.0.1.Final")
+
+
     testImplementation("junit:junit:4.12")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
@@ -65,4 +79,40 @@ tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
     }
+}
+
+
+
+sourceSets.main {
+    java.srcDir("$buildDir/generatedSources/src/main/java")
+    resources.srcDir("$buildDir/generatedSources/src/main/resources")
+}
+tasks.named("compileJava") {
+    dependsOn("openApiGenerate")
+}
+tasks.named("processResources")
+{ dependsOn("openApiGenerate") }
+
+
+openApiGenerate {
+    generatorName.set("java")
+    inputSpec.set("$rootDir/src/main/specs/IGW_API_SEARCH_&_PRODUCT_V_5.yaml")
+    outputDir.set("$buildDir/generatedSources")
+    apiPackage.set("com.atradius.corporate-reference-data.api")
+    modelPackage.set("com.atradius.corporate-reference-data.api.model")
+    configOptions.set(mapOf("dateLibrary" to "java8-localdatetime", "implicitHeaders" to "true", "openApiNullable" to "false", "useBeanValidation" to "true", "useSpringBoot3" to "true", "useTags" to "true"))
+    ignoreFileOverride.set ("$rootDir/src/main/specs/.openapi-generator-ignore")
+}
+
+tasks.register("apiaryGenerate", GenerateTask::class) {
+    group = "OpenAPI Tools"
+    description = "Generate Apiary API"
+    generatorName.set("java")
+    inputSpec.set("$rootDir/src/main/specs/IGW_API_SEARCH_&_PRODUCT_V_5.yaml")
+    outputDir.set("$buildDir/generatedSources")
+    apiPackage.set("com.atradius.apiary.corporate-reference-data.api")
+    modelPackage.set("com.atradius.apiary.corporate-reference-data.api.model")
+    configOptions.set(mapOf("dateLibrary" to "java8-localdatetime",
+            "implicitHeaders" to "true", "openApiNullable" to "false",
+            "useBeanValidation" to "true", "useSpringBoot3" to "true", "useTags" to "true"))
 }

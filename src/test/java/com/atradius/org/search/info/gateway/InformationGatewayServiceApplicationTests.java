@@ -28,6 +28,7 @@ class InformationGatewayServiceApplicationTests {
     public void setup() {
 
         ReflectionTestUtils.setField(informationGatewayClient, "baseUrl", "http://localhost:" + environment.getProperty("wiremock.server.port"));
+
     }
 
     @Test
