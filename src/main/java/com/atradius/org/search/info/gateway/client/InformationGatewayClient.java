@@ -10,6 +10,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.*;
 
@@ -24,18 +26,16 @@ public class InformationGatewayClient {
     @Value("${information.gateway.api.path}")
     private String apiPath;
 
-    @Autowired
-    private RestTemplate template;
-
     public GatewayResponse queryInformationGateway(InformationGateWayRequest informationGateWayRequest)   {
-        template.setMessageConverters(getJsonMessageConverters());
-
-        HttpHeaders headers = getHttpHeaders();
-        HttpEntity<InformationGateWayRequest> requestEntity =  new HttpEntity<>(informationGateWayRequest, headers);
-        ResponseEntity<CompanySearchResultItem[]> responseEntity =         template.exchange(composeUrl(), HttpMethod.POST, requestEntity,
-                        CompanySearchResultItem[].class);
+        WebClient webClient = WebClient.create(baseUrl);
+        Mono<CompanySearchResultItem[]> createdEmployee = webClient.post()
+                .uri(apiPath)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just("{}"), String.class)
+                .retrieve()
+                .bodyToMono(CompanySearchResultItem[].class);
         GatewayResponse gatewayResponse = new GatewayResponse();
-        gatewayResponse.setCompanySearchResultItems(Arrays.asList(Objects.requireNonNull(responseEntity.getBody())));
+        gatewayResponse.setCompanySearchResultItems(Arrays.asList(Objects.requireNonNull(createdEmployee.block())));
         return gatewayResponse;
     }
 

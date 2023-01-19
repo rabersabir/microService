@@ -14,9 +14,4 @@ public class InformationGatewayServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(InformationGatewayServiceApplication.class, args);
     }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 }

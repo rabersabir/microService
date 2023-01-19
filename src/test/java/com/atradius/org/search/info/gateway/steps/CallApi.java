@@ -12,8 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CallApi {
     @Given("I search for for company I expect this result")
     public void iSearchForForCompanyIExpectThisResult(List<CompanyInfoDataTable> companyInfoDataTables) {
-        GatewayResponse response = TestUtils.callAPI(GatewayResponse.class);
+        GatewayResponse response = TestUtils.callAPI();
         assertThat(response.getCompanySearchResultItems().size()).isEqualTo(companyInfoDataTables.size());
     }
-
 }
