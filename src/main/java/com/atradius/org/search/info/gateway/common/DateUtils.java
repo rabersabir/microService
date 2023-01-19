@@ -2,22 +2,23 @@ package com.atradius.org.search.info.gateway.common;
 
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class DateUtils {
 
-    private final static DateTimeFormatter defaultDateTimeFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-
+    private final static DateTimeFormatter defaultDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 
     public static String getDateTimeAsString() {
 
 
-        return getDateTimeAsString(LocalDateTime.now(),defaultDateTimeFormatter );
+        return getDateTimeAsString(LocalDateTime.now(), defaultDateTimeFormatter);
     }
 
     private static String getDateTimeAsString(LocalDateTime localDateTime, DateTimeFormatter dateTimeFormatter) {
-        return  localDateTime.format(defaultDateTimeFormatter);
+
+        return localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
     }
 

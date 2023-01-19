@@ -1,5 +1,6 @@
 package com.atradius.org.search.info.gateway.service;
 
+import com.atradius.org.search.info.gateway.client.GatewayResponse;
 import com.atradius.org.search.info.gateway.client.InformationGateWayRequest;
 import com.atradius.org.search.info.gateway.client.InformationGatewayClient;
 import com.atradius.org.search.info.gateway.client.RequestPayload;
@@ -21,12 +22,12 @@ public class InformationGatewaySearchService {
     }
 
 
-    public void findCompanies(FindCompanyRequest findCompanyRequest) {
+    public GatewayResponse findCompanies(FindCompanyRequest findCompanyRequest) {
 
         InformationGateWayRequest informationGateWayRequest = new InformationGateWayRequest();
         informationGateWayRequest.setConsumer("SHARED_COMPONENT");
         informationGateWayRequest.setRequestPayload(createPayload(findCompanyRequest));
-        informationGatewayClient.queryInformationGateway(informationGateWayRequest);
+       return informationGatewayClient.queryInformationGateway(informationGateWayRequest);
     }
 
     private RequestPayload createPayload(FindCompanyRequest findCompanyRequest) {

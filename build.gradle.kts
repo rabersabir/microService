@@ -44,9 +44,11 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-test")
     testImplementation("io.cucumber:cucumber-java:7.11.0")
     testImplementation("io.cucumber:cucumber-spring:6.11.0")
     testImplementation("io.cucumber:cucumber-junit:7.11.0")
+    testCompileOnly("org.projectlombok:lombok")
 }
 
 val cucumberRuntime by configurations.creating {
